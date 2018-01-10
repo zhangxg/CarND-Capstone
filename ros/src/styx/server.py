@@ -1,17 +1,17 @@
 #!/usr/bin/env python
 
-import eventlet
-eventlet.monkey_patch(socket=True, select=True, time=True)
-
-import eventlet.wsgi
 import socketio
+import eventlet
+import eventlet.wsgi
 import time
+eventlet.monkey_patch()
 from flask import Flask, render_template
 
 from bridge import Bridge
 from conf import conf
 
-sio = socketio.Server()
+#sio = socketio.Server()
+sio = socketio.Server(async_mode='eventlet')
 app = Flask(__name__)
 msgs = []
 
